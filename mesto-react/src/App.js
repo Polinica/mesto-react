@@ -1,4 +1,4 @@
-import "./App.css";
+import logo from './images/Vector.svg';
 
 function App() {
   return (
@@ -6,7 +6,7 @@ function App() {
       {/* <!-- Header --> */}
       <header class="header content__element">
         <img
-          src="<%=require('./images/Vector.svg')%>"
+          src={logo}
           alt="Место. Логотип проекта"
           class="header__logo"
         />
