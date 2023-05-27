@@ -3,8 +3,9 @@ import api from "../utils/Api";
 
 function Main(props) {
   const [userAvatar, setUserAvatar] = React.useState("#");
-  const [userName, setUserName] = React.useState(". . .");
+  const [userName, setUserName] = React.useState("");
   const [userDescription, setUserDescription] = React.useState("");
+  const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
     api
@@ -13,6 +14,13 @@ function Main(props) {
         setUserAvatar(res.avatar);
         setUserName(res.name);
         setUserDescription(res.about);
+      })
+      .catch((err) => console.error(err));
+
+    api
+      .getInitialCards()
+      .then((res) => {
+        setCards(res);
       })
       .catch((err) => console.error(err));
   }, []);
@@ -58,11 +66,16 @@ function Main(props) {
       {/* <!-- Elements --> */}
       <section class="cards content__element" aria-label="Фотографии">
         {/* <!--  6 карточек, которые добавит JavaScript --> */}
-        <template id="card">
-          <div class="card">
-            <img src="#" alt="#" class="card__image" />
+        {cards.map((card) => (
+          <div class="card" key={card._id}>
+            <div
+              //src={card.link}
+              style={{ backgroundImage: `url(${card.link})` }}
+              alt={card.name}
+              class="card__image"
+            />
             <div class="card__description">
-              <h2 class="card__title">#</h2>
+              <h2 class="card__title">{card.name}</h2>
               <div class="card__like">
                 <button
                   type="button"
@@ -78,7 +91,8 @@ function Main(props) {
               aria-label="Удалить"
             ></button>
           </div>
-        </template>
+        ))}
+        ;
       </section>
     </main>
   );
