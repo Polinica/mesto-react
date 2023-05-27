@@ -1,3 +1,4 @@
+import React from "react";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -5,11 +6,33 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 
 function App() {
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
+    React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
+    React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+
+  function handleEditAvatarClick() {
+    setIsEditAvatarPopupOpen(true);
+  }
+
+  function handleEditProfileClick() {
+    setIsEditProfilePopupOpen(true);
+  }
+
+  function handleAddPlaceClick() {
+    setIsAddPlacePopupOpen(true);
+  }
+
   return (
     <div class="content">
       <Header />
 
-      <Main />
+      <Main
+        onEditProfile={handleEditProfileClick}
+        onAddPlace={handleAddPlaceClick}
+        onEditAvatar={handleEditAvatarClick}
+      />
 
       <Footer />
 
@@ -17,10 +40,21 @@ function App() {
         name="edit-profile"
         title="Редактировать профиль"
         children=""
+        isOpen={isEditProfilePopupOpen}
       />
-      <PopupWithForm name="change-avatar" title="Обновить аватар" children="" />
-      <PopupWithForm name="add-card" title="Новое место" children="" />
-      <PopupWithForm name="confirm" title="Вы уверены?" children="" />
+      <PopupWithForm
+        name="change-avatar"
+        title="Обновить аватар"
+        children=""
+        isOpen={isEditAvatarPopupOpen}
+      />
+      <PopupWithForm
+        name="add-card"
+        title="Новое место"
+        children=""
+        isOpen={isAddPlacePopupOpen}
+      />
+      <PopupWithForm name="confirm" title="Вы уверены?" children="" isOpen="" />
       <ImagePopup />
 
       {/* <!-- Popups --> */}

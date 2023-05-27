@@ -1,19 +1,4 @@
-function Main() {
-  function handleEditAvatarClick() {
-    const popup = document.querySelector(".popup_type_change-avatar");
-    popup.classList.add("popup_opened");
-  }
-
-  function handleEditProfileClick() {
-    const popup = document.querySelector(".popup_type_edit-profile");
-    popup.classList.add("popup_opened");
-  }
-
-  function handleAddPlaceClick() {
-    const popup = document.querySelector(".popup_type_add-card");
-    popup.classList.add("popup_opened");
-  }
-
+function Main(props) {
   return (
     <main>
       {/* <!-- Profile --> */}
@@ -28,7 +13,7 @@ function Main() {
             class="profile__avatar-button"
             type="button"
             aria-label="Обновить аватар"
-            onClick={handleEditAvatarClick}
+            onClick={props.onEditAvatar}
           ></button>
         </div>
         <div class="profile__info">
@@ -38,7 +23,7 @@ function Main() {
               type="button"
               class="profile__button profile__button_type_edit"
               aria-label="Редактировать профиль"
-              onClick={handleEditProfileClick}
+              onClick={props.onEditProfile}
             ></button>
           </div>
           <p class="profile__job"></p>
@@ -47,7 +32,7 @@ function Main() {
           type="button"
           class="profile__button profile__button_type_add"
           aria-label="Добавить фотографию"
-          onClick={handleAddPlaceClick}
+          onClick={props.onAddPlace}
         ></button>
       </section>
 
