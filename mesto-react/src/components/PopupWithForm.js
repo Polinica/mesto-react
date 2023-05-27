@@ -48,6 +48,7 @@ function PopupWithForm(props) {
           className="popup__cancel-button"
           type="button"
           aria-label="Закрыть окно"
+          onClick={props.onClose}
         ></button>
       </div>
     </div>
