@@ -2,6 +2,7 @@ import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
+import ImagePopup from "./ImagePopup";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <PopupWithForm name="change-avatar" title="Обновить аватар" children="" />
       <PopupWithForm name="add-card" title="Новое место" children="" />
       <PopupWithForm name="confirm" title="Вы уверены?" children="" />
+      <ImagePopup />
 
       {/* <!-- Popups --> */}
 
@@ -142,19 +144,6 @@ function App() {
             aria-label="Закрыть окно"
           ></button>
         </div>
-      </div>
-
-      {/* <!-- Popup: Увеличенное изображение --> */}
-      <div class="popup popup_type_image">
-        <figure class="popup__image-container">
-          <img src="#" alt="#" class="popup__image" />
-          <figcaption class="popup__image-caption">#</figcaption>
-          <button
-            class="popup__cancel-button"
-            type="button"
-            aria-label="Закрыть окно"
-          ></button>
-        </figure>
       </div>
 
       {/* <!-- Popup: Подтверждение удаления --> */}
