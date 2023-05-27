@@ -39,31 +39,10 @@ function App() {
       <PopupWithForm
         name="edit-profile"
         title="Редактировать профиль"
-        children=""
+        buttonText="Сохранить"
         isOpen={isEditProfilePopupOpen}
-      />
-      <PopupWithForm
-        name="change-avatar"
-        title="Обновить аватар"
-        children=""
-        isOpen={isEditAvatarPopupOpen}
-      />
-      <PopupWithForm
-        name="add-card"
-        title="Новое место"
-        children=""
-        isOpen={isAddPlacePopupOpen}
-      />
-      <PopupWithForm name="confirm" title="Вы уверены?" children="" isOpen="" />
-      <ImagePopup />
-
-      {/* <!-- Popups --> */}
-
-      {/* <!-- Popup: редактировать профиль --> */}
-      <div class="popup popup_type_edit-profile">
-        <div class="popup__container">
-          <h2 class="popup__title">Редактировать профиль</h2>
-          <form class="popup__form" name="popupForm" novalidate>
+        children={
+          <>
             <label class="popup__field">
               <input
                 id="name-input"
@@ -94,51 +73,35 @@ function App() {
                 Вы пропустили это поле.
               </span>
             </label>
-            <button class="popup__save-button" type="submit">
-              Сохранить
-            </button>
-          </form>
-          <button
-            class="popup__cancel-button"
-            type="button"
-            aria-label="Закрыть окно"
-          ></button>
-        </div>
-      </div>
-
-      {/* <!-- Popup: обновление аватара --> */}
-      <div class="popup popup_type_change-avatar">
-        <div class="popup__container content__element">
-          <h2 class="popup__title">Обновить аватар</h2>
-          <form class="popup__form" name="avatarChangePopupForm" novalidate>
-            <label class="popup__field">
-              <input
-                type="url"
-                class="popup__input popup__input_type_link"
-                id="avatar-link-input"
-                placeholder="Ссылка на картинку"
-                name="link"
-                required
-              />
-              <span class="popup__input-error avatar-link-input-error"></span>
-            </label>
-            <button class="popup__save-button" type="submit">
-              Сохранить
-            </button>
-          </form>
-          <button
-            class="popup__cancel-button"
-            type="button"
-            aria-label="Закрыть окно"
-          ></button>
-        </div>
-      </div>
-
-      {/* <!-- Popup: Новое место --> */}
-      <div class="popup popup_type_add-card">
-        <div class="popup__container">
-          <h2 class="popup__title">Новое место</h2>
-          <form class="popup__form" name="popupForm" novalidate>
+          </>
+        }
+      />
+      <PopupWithForm
+        name="change-avatar"
+        title="Обновить аватар"
+        buttonText="Сохранить"
+        isOpen={isEditAvatarPopupOpen}
+        children={
+          <label class="popup__field">
+            <input
+              type="url"
+              class="popup__input popup__input_type_link"
+              id="avatar-link-input"
+              placeholder="Ссылка на картинку"
+              name="link"
+              required
+            />
+            <span class="popup__input-error avatar-link-input-error"></span>
+          </label>
+        }
+      />
+      <PopupWithForm
+        name="add-card"
+        title="Новое место"
+        buttonText="Создать"
+        isOpen={isAddPlacePopupOpen}
+        children={
+          <>
             <label class="popup__field">
               <input
                 id="title-input"
@@ -168,7 +131,73 @@ function App() {
                 Введите адрес сайта.
               </span>
             </label>
-            <button class="popup__save-button" type="submit">
+          </>
+        }
+      />
+      <PopupWithForm
+        name="confirm"
+        title="Вы уверены?"
+        buttonText="Да"
+        isOpen={false}
+        children={<></>}
+      />
+      <ImagePopup />
+
+      {/* <!-- Popups --> */}
+
+      {/* <!-- Popup: редактировать профиль --> */}
+      {/* <div class="popup popup_type_edit-profile">
+        <div class="popup__container">
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <form class="popup__form" name="popupForm" novalidate> */}
+
+      {/* <button class="popup__save-button" type="submit">
+              Сохранить
+            </button>
+          </form>
+          <button
+            class="popup__cancel-button"
+            type="button"
+            aria-label="Закрыть окно"
+          ></button>
+        </div>
+      </div> */}
+
+      {/* <!-- Popup: обновление аватара --> */}
+      {/* <div class="popup popup_type_change-avatar">
+        <div class="popup__container content__element">
+          <h2 class="popup__title">Обновить аватар</h2>
+          <form class="popup__form" name="avatarChangePopupForm" novalidate> */}
+      {/* <label class="popup__field">
+              <input
+                type="url"
+                class="popup__input popup__input_type_link"
+                id="avatar-link-input"
+                placeholder="Ссылка на картинку"
+                name="link"
+                required
+              />
+              <span class="popup__input-error avatar-link-input-error"></span>
+            </label> */}
+      {/* <button class="popup__save-button" type="submit">
+              Сохранить
+            </button>
+          </form>
+          <button
+            class="popup__cancel-button"
+            type="button"
+            aria-label="Закрыть окно"
+          ></button>
+        </div>
+      </div> */}
+
+      {/* <!-- Popup: Новое место --> */}
+      {/* <div class="popup popup_type_add-card">
+        <div class="popup__container">
+          <h2 class="popup__title">Новое место</h2>
+          <form class="popup__form" name="popupForm" novalidate> */}
+
+      {/* <button class="popup__save-button" type="submit">
               Создать
             </button>
           </form>
@@ -178,10 +207,10 @@ function App() {
             aria-label="Закрыть окно"
           ></button>
         </div>
-      </div>
+      </div> */}
 
       {/* <!-- Popup: Подтверждение удаления --> */}
-      <div class="popup popup_type_confirm">
+      {/* <div class="popup popup_type_confirm">
         <div class="popup__container content__element">
           <h2 class="popup__title">Вы уверены?</h2>
           <button class="popup__save-button" type="button">
@@ -193,7 +222,7 @@ function App() {
             aria-label="Закрыть окно"
           ></button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
