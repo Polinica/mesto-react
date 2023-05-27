@@ -1,5 +1,6 @@
 import React from "react";
 import api from "../utils/Api";
+import Card from "./Card";
 
 function Main(props) {
   const [userAvatar, setUserAvatar] = React.useState("#");
@@ -67,30 +68,7 @@ function Main(props) {
       <section class="cards content__element" aria-label="Фотографии">
         {/* <!--  6 карточек, которые добавит JavaScript --> */}
         {cards.map((card) => (
-          <div class="card" key={card._id}>
-            <div
-              //src={card.link}
-              style={{ backgroundImage: `url(${card.link})` }}
-              alt={card.name}
-              class="card__image"
-            />
-            <div class="card__description">
-              <h2 class="card__title">{card.name}</h2>
-              <div class="card__like">
-                <button
-                  type="button"
-                  class="card__like-button"
-                  aria-label="Добавить в избранное"
-                ></button>
-                <span class="card__like-count"></span>
-              </div>
-            </div>
-            <button
-              type="button"
-              class="card__delete-button"
-              aria-label="Удалить"
-            ></button>
-          </div>
+          <Card card={card} />
         ))}
         ;
       </section>
