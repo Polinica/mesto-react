@@ -68,7 +68,7 @@ function Main(props) {
       <section class="cards content__element" aria-label="Фотографии">
         {/* <!--  6 карточек, которые добавит JavaScript --> */}
         {cards.map((card) => (
-          <Card card={card} />
+          <Card card={card} key={card._id} onCardClick={props.onCardClick} />
         ))}
         ;
       </section>

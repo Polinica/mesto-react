@@ -1,11 +1,16 @@
 function Card(props) {
+  function handleCardClick() {
+    props.onCardClick(props.card);
+  }
+
   return (
     <div class="card" key={props.card._id}>
-      <div
-        //src={card.link}
-        style={{ backgroundImage: `url(${props.card.link})` }}
+      <img
+        src={props.card.link}
+        //style={{ backgroundImage: `url(${props.card.link})` }}
         alt={props.card.name}
         class="card__image"
+        onClick={handleCardClick}
       />
       <div class="card__description">
         <h2 class="card__title">{props.card.name}</h2>
