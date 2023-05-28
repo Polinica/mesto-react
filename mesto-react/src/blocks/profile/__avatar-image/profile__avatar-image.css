@@ -8,4 +8,7 @@
   position: relative;
   border-radius: 50%;
   overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
