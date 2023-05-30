@@ -40,7 +40,7 @@ function App() {
   }
 
   return (
-    <div class="content">
+    <div className="content">
       <Header />
 
       <Main
@@ -58,109 +58,105 @@ function App() {
         buttonText="Сохранить"
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
-        children={
-          <>
-            <label class="popup__field">
-              <input
-                id="name-input"
-                type="text"
-                class="popup__input popup__input_type_name"
-                placeholder="Имя"
-                name="name"
-                minlength="2"
-                maxlength="40"
-                required
-              />
-              <span class="popup__input-error name-input-error popup__input-error_type_name">
-                Вы пропустили это поле.
-              </span>
-            </label>
-            <label class="popup__field">
-              <input
-                id="job-input"
-                type="text"
-                class="popup__input popup__input_type_job"
-                placeholder="Профессия"
-                name="job"
-                minlength="2"
-                maxlength="200"
-                required
-              />
-              <span class="popup__input-error popup__input-error_type_job job-input-error">
-                Вы пропустили это поле.
-              </span>
-            </label>
-          </>
-        }
-      />
+      ></PopupWithForm>
+
+      <label className="popup__field">
+        <input
+          id="name-input"
+          type="text"
+          className="popup__input popup__input_type_name"
+          placeholder="Имя"
+          name="name"
+          minLength="2"
+          maxLength="40"
+          required
+        />
+        <span className="popup__input-error name-input-error popup__input-error_type_name">
+          Вы пропустили это поле.
+        </span>
+      </label>
+      <label className="popup__field">
+        <input
+          id="job-input"
+          type="text"
+          className="popup__input popup__input_type_job"
+          placeholder="Профессия"
+          name="job"
+          minLength="2"
+          maxLength="200"
+          required
+        />
+        <span className="popup__input-error popup__input-error_type_job job-input-error">
+          Вы пропустили это поле.
+        </span>
+      </label>
+
       <PopupWithForm
         name="change-avatar"
         title="Обновить аватар"
         buttonText="Сохранить"
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
-        children={
-          <label class="popup__field">
-            <input
-              type="url"
-              class="popup__input popup__input_type_link"
-              id="avatar-link-input"
-              placeholder="Ссылка на картинку"
-              name="link"
-              required
-            />
-            <span class="popup__input-error avatar-link-input-error"></span>
-          </label>
-        }
-      />
+      ></PopupWithForm>
+
+      <label className="popup__field">
+        <input
+          type="url"
+          className="popup__input popup__input_type_link"
+          id="avatar-link-input"
+          placeholder="Ссылка на картинку"
+          name="link"
+          required
+        />
+        <span className="popup__input-error avatar-link-input-error"></span>
+      </label>
+
       <PopupWithForm
         name="add-card"
         title="Новое место"
         buttonText="Создать"
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
-        children={
-          <>
-            <label class="popup__field">
-              <input
-                id="title-input"
-                type="text"
-                class="popup__input popup__input_type_title"
-                placeholder="Название"
-                name="name"
-                minlength="2"
-                maxlength="30"
-                required
-              />
-              <span class="popup__input-error popup__input-error_type_title title-input-error">
-                Вы пропустили это поле.
-              </span>
-            </label>
-            <label class="popup__field">
-              <input
-                id="link-input"
-                type="url"
-                class="popup__input popup__input_type_link"
-                placeholder="Ссылка на картинку"
-                name="link"
-                required
-              />
+      ></PopupWithForm>
 
-              <span class="popup__input-error popup__input-error_type_link link-input-error">
-                Введите адрес сайта.
-              </span>
-            </label>
-          </>
-        }
-      />
+      <label className="popup__field">
+        <input
+          id="title-input"
+          type="text"
+          className="popup__input popup__input_type_title"
+          placeholder="Название"
+          name="name"
+          minLength="2"
+          maxlength="30"
+          required
+        />
+        <span className="popup__input-error popup__input-error_type_title title-input-error">
+          Вы пропустили это поле.
+        </span>
+      </label>
+      <label className="popup__field">
+        <input
+          id="link-input"
+          type="url"
+          className="popup__input popup__input_type_link"
+          placeholder="Ссылка на картинку"
+          name="link"
+          required
+        />
+
+        <span className="popup__input-error popup__input-error_type_link link-input-error">
+          Введите адрес сайта.
+        </span>
+      </label>
+
       <PopupWithForm
         name="confirm"
         title="Вы уверены?"
         buttonText="Да"
         isOpen={false}
         onClose={closeAllPopups}
-        children={<></>}
-      />
+      ></PopupWithForm>
+
       <ImagePopup
         card={selectedCard}
         onClose={closeAllPopups}
