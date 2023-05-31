@@ -2,7 +2,7 @@ import React from "react";
 import api from "../utils/Api";
 import Card from "./Card";
 
-function Main(props) {
+function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
   const [userAvatar, setUserAvatar] = React.useState("#");
   const [userName, setUserName] = React.useState("");
   const [userDescription, setUserDescription] = React.useState("");
@@ -41,7 +41,7 @@ function Main(props) {
             className="profile__avatar-button"
             type="button"
             aria-label="Обновить аватар"
-            onClick={props.onEditAvatar}
+            onClick={onEditAvatar}
           ></button>
         </div>
         <div className="profile__info">
@@ -51,7 +51,7 @@ function Main(props) {
               type="button"
               className="profile__button profile__button_type_edit"
               aria-label="Редактировать профиль"
-              onClick={props.onEditProfile}
+              onClick={onEditProfile}
             ></button>
           </div>
           <p className="profile__job">{userDescription}</p>
@@ -60,7 +60,7 @@ function Main(props) {
           type="button"
           className="profile__button profile__button_type_add"
           aria-label="Добавить фотографию"
-          onClick={props.onAddPlace}
+          onClick={onAddPlace}
         ></button>
       </section>
 
@@ -68,7 +68,7 @@ function Main(props) {
       <section className="cards content__element" aria-label="Фотографии">
         {/* <!--  6 карточек, которые добавит JavaScript --> */}
         {cards.map((card) => (
-          <Card card={card} key={card._id} onCardClick={props.onCardClick} />
+          <Card card={card} key={card._id} onCardClick={onCardClick} />
         ))}
         ;
       </section>
