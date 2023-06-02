@@ -1,20 +1,20 @@
-function ImagePopup({ card, onClose, isOpen }) {
+function ImagePopup(props) {
   return (
     // {/* <!-- Popup: Увеличенное изображение --> */}
-    <div className={`popup popup_type_image` + (isOpen && " popup_opened")}>
+    <div className={`popup popup_type_image` + (props.isOpen && " popup_opened")}>
       <figure className="popup__image-container">
-        <div
-          //style={{ backgroundImage: `url(${props.card.link})` }}
-          src={card.link}
-          alt={card.name}
+        <img
+          //style={{ backgroundImage: `url(${card.link})` }}
+          src={props.card.link}
+          alt={props.card.name}
           className="popup__image"
         />
-        <figcaption className="popup__image-caption">{card.name}</figcaption>
+        <figcaption className="popup__image-caption">{props.card.name}</figcaption>
         <button
           className="popup__cancel-button"
           type="button"
           aria-label="Закрыть окно"
-          onClick={onClose}
+          onClick={props.onClose}
         ></button>
       </figure>
     </div>

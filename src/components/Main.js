@@ -31,9 +31,9 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
       {/* <!-- Profile --> */}
       <section className="profile content__element">
         <div className="profile__avatar">
-          <div //img
-            //src={{ backgroundImage: `url(${userAvatar})` }}
+          <div
             style={{ backgroundImage: `url(${userAvatar})` }}
+            //style={{ backgroundImage: `url(${userAvatar})` }}
             alt="Фотография пользователя"
             clclassNamess="profile__avatar-image"
           />
