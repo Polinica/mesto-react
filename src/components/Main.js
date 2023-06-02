@@ -29,43 +29,43 @@ function Main(props) {
   return (
     <main>
       {/* <!-- Profile --> */}
-      <section class="profile content__element">
-        <div class="profile__avatar">
+      <section className="profile content__element">
+        <div className="profile__avatar">
           <div //img
             //src={{ backgroundImage: `url(${userAvatar})` }}
             style={{ backgroundImage: `url(${userAvatar})` }}
             alt="Фотография пользователя"
-            class="profile__avatar-image"
+            className="profile__avatar-image"
           />
           <button
-            class="profile__avatar-button"
+            className="profile__avatar-button"
             type="button"
             aria-label="Обновить аватар"
             onClick={props.onEditAvatar}
           ></button>
         </div>
-        <div class="profile__info">
-          <div class="profile__name-block">
-            <h1 class="profile__name">{userName}</h1>
+        <div className="profile__info">
+          <div className="profile__name-block">
+            <h1 className="profile__name">{userName}</h1>
             <button
               type="button"
-              class="profile__button profile__button_type_edit"
+              className="profile__button profile__button_type_edit"
               aria-label="Редактировать профиль"
               onClick={props.onEditProfile}
             ></button>
           </div>
-          <p class="profile__job">{userDescription}</p>
+          <p className="profile__job">{userDescription}</p>
         </div>
         <button
           type="button"
-          class="profile__button profile__button_type_add"
+          className="profile__button profile__button_type_add"
           aria-label="Добавить фотографию"
           onClick={props.onAddPlace}
         ></button>
       </section>
 
       {/* <!-- Elements --> */}
-      <section class="cards content__element" aria-label="Фотографии">
+      <section className="cards content__element" aria-label="Фотографии">
         {/* <!--  6 карточек, которые добавит JavaScript --> */}
         {cards.map((card) => (
           <Card card={card} key={card._id} onCardClick={props.onCardClick} />
