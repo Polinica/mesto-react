@@ -1,19 +1,19 @@
-function Card({ card, onCardClick }) {
+function Card(props) {
   function handleCardClick() {
-    onCardClick(card);
+    props.onCardClick(props.card);
   }
 
   return (
-    <div className="card" key={card._id}>
+    <div className="card" key={props.card._id}>
       <img
-        src={card.link}
+        src={props.card.link}
         //style={{ backgroundImage: `url(${props.card.link})` }}
-        alt={card.name}
+        alt={props.card.name}
         className="card__image"
         onClick={handleCardClick}
       />
       <div className="card__description">
-        <h2 className="card__title">{card.name}</h2>
+        <h2 className="card__title">{props.card.name}</h2>
         <div className="card__like">
           <button
             type="button"

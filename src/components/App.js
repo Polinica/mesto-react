@@ -155,8 +155,8 @@ function App() {
         buttonText="Да"
         isOpen={false}
         onClose={closeAllPopups}
-      ></PopupWithForm>
-
+        children={<></>}
+      />
       <ImagePopup
         card={selectedCard}
         onClose={closeAllPopups}

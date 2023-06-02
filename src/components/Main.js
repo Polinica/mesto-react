@@ -2,7 +2,7 @@ import React from "react";
 import api from "../utils/Api";
 import Card from "./Card";
 
-function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
+function Main(props) {
   const [userAvatar, setUserAvatar] = React.useState("#");
   const [userName, setUserName] = React.useState("");
   const [userDescription, setUserDescription] = React.useState("");
@@ -31,17 +31,17 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
       {/* <!-- Profile --> */}
       <section className="profile content__element">
         <div className="profile__avatar">
-          <div
+          <div //img
+            //src={{ backgroundImage: `url(${userAvatar})` }}
             style={{ backgroundImage: `url(${userAvatar})` }}
-            //style={{ backgroundImage: `url(${userAvatar})` }}
             alt="Фотография пользователя"
-            clclassNamess="profile__avatar-image"
+            className="profile__avatar-image"
           />
           <button
             className="profile__avatar-button"
             type="button"
             aria-label="Обновить аватар"
-            onClick={onEditAvatar}
+            onClick={props.onEditAvatar}
           ></button>
         </div>
         <div className="profile__info">
@@ -51,7 +51,7 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
               type="button"
               className="profile__button profile__button_type_edit"
               aria-label="Редактировать профиль"
-              onClick={onEditProfile}
+              onClick={props.onEditProfile}
             ></button>
           </div>
           <p className="profile__job">{userDescription}</p>
@@ -60,7 +60,7 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
           type="button"
           className="profile__button profile__button_type_add"
           aria-label="Добавить фотографию"
-          onClick={onAddPlace}
+          onClick={props.onAddPlace}
         ></button>
       </section>
 
@@ -68,7 +68,7 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
       <section className="cards content__element" aria-label="Фотографии">
         {/* <!--  6 карточек, которые добавит JavaScript --> */}
         {cards.map((card) => (
-          <Card card={card} key={card._id} onCardClick={onCardClick} />
+          <Card card={card} key={card._id} onCardClick={props.onCardClick} />
         ))}
         ;
       </section>
