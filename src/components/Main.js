@@ -9,8 +9,6 @@ function Main(props) {
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
-    
-
     api
       .getInitialCards()
       .then((res) => {
