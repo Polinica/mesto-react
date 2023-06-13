@@ -129,7 +129,7 @@ class Api {
    * @param {string} cardId - ID карточки
    * @returns {Promise} Промис с массивом новых лайков карточки
    */
-  setLike(cardId) {
+  _setLike(cardId) {
     const url = `${this._baseUrl}/cards/${cardId}/likes`;
 
     return fetch(url, {
@@ -142,7 +142,7 @@ class Api {
    * @param {string} cardId - ID карточки
    * @returns {Promise} Промис с массивом новых лайков карточки
    */
-  deleteLike(cardId) {
+  _deleteLike(cardId) {
     const url = `${this._baseUrl}/cards/${cardId}/likes`;
 
     return fetch(url, {
@@ -159,11 +159,11 @@ class Api {
    */
   toggleLike(cardId, isLiked) {
     if (isLiked) {
-      return this.deleteLike(cardId).then((res) => {
+      return this._deleteLike(cardId).then((res) => {
         return res.likes;
       });
     } else {
-      return this.setLike(cardId).then((res) => {
+      return this._setLike(cardId).then((res) => {
         return res.likes;
       });
     }

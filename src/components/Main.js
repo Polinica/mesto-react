@@ -14,8 +14,18 @@ function Main(props) {
       .then((res) => {
         setCards(res);
       })
-      .catch((err) => console.error(err));
+      .catch(console.error);
   }, []);
+
+  function handleCardLike(card) {
+    // Снова проверяем, есть ли уже лайк на этой карточке
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    api.toggleLike(card._id, isLiked).then((newCard) => {
+      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
+    });
+  }
 
   return (
     <main>
@@ -59,7 +69,12 @@ function Main(props) {
       <section className="cards content__element" aria-label="Фотографии">
         {/* <!--  6 карточек, которые добавит JavaScript --> */}
         {cards.map((card) => (
-          <Card card={card} key={card._id} onCardClick={props.onCardClick} />
+          <Card
+            card={card}
+            key={card._id}
+            onCardClick={props.onCardClick}
+            onCardLike={handleCardLike}
+          />
         ))}
         ;
       </section>

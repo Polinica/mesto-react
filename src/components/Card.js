@@ -1,17 +1,22 @@
 import React from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
-function Card({ card, onCardClick }) {
+function Card({ card, onCardClick, onCardLike }) {
+  //console.log(card.owner._id);
   const currentUser = React.useContext(CurrentUserContext);
   // Определяем, являемся ли мы владельцем текущей карточки
-  const isOwn = card.owner._id === currentUser._id;
+  const isOwner = card.owner._id === currentUser._id;
   // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
-  const isLiked = card.likes.some((i) => i._id === currentUser._id);
+  const isLiked = card.likes.some((person) => person._id === currentUser._id);
   // Создаём переменную, которую после зададим в `className` для кнопки лайка
-  const cardLikeButtonClassName = "card__like-button_active";
+  const activeLikeButtonClassName = "card__like-button_active";
 
   function handleCardClick() {
     onCardClick(card);
+  }
+
+  function handleCardLike() {
+    onCardLike(card);
   }
 
   return (
@@ -28,14 +33,17 @@ function Card({ card, onCardClick }) {
         <div className="card__like">
           <button
             type="button"
-            className="card__like-button"
+            className={
+              "card__like-button " + (isLiked && activeLikeButtonClassName)
+            }
             aria-label="Добавить в избранное"
+            onClick={handleCardLike}
           ></button>
           <span className="card__like-count"></span>
         </div>
       </div>
       {/* Далее в разметке используем переменную для условного рендеринга */}
-      {isOwn && (
+      {isOwner && (
         <button
           type="button"
           className="card__delete-button"

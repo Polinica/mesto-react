@@ -166,94 +166,13 @@ function App() {
           buttonText="Да"
           isOpen={false}
           onClose={closeAllPopups}
-          children={<></>}
+          //children={<></>}
         />
         <ImagePopup
           card={selectedCard}
           onClose={closeAllPopups}
           //isOpen={isImagePopupOpen}
         />
-
-        {/* <!-- Popups --> */}
-
-        {/* <!-- Popup: редактировать профиль --> */}
-        {/* <div class="popup popup_type_edit-profile">
-        <div class="popup__container">
-          <h2 class="popup__title">Редактировать профиль</h2>
-          <form class="popup__form" name="popupForm" novalidate> */}
-
-        {/* <button class="popup__save-button" type="submit">
-              Сохранить
-            </button>
-          </form>
-          <button
-            class="popup__cancel-button"
-            type="button"
-            aria-label="Закрыть окно"
-          ></button>
-        </div>
-      </div> */}
-
-        {/* <!-- Popup: обновление аватара --> */}
-        {/* <div class="popup popup_type_change-avatar">
-        <div class="popup__container content__element">
-          <h2 class="popup__title">Обновить аватар</h2>
-          <form class="popup__form" name="avatarChangePopupForm" novalidate> */}
-        {/* <label class="popup__field">
-              <input
-                type="url"
-                class="popup__input popup__input_type_link"
-                id="avatar-link-input"
-                placeholder="Ссылка на картинку"
-                name="link"
-                required
-              />
-              <span class="popup__input-error avatar-link-input-error"></span>
-            </label> */}
-        {/* <button class="popup__save-button" type="submit">
-              Сохранить
-            </button>
-          </form>
-          <button
-            class="popup__cancel-button"
-            type="button"
-            aria-label="Закрыть окно"
-          ></button>
-        </div>
-      </div> */}
-
-        {/* <!-- Popup: Новое место --> */}
-        {/* <div class="popup popup_type_add-card">
-        <div class="popup__container">
-          <h2 class="popup__title">Новое место</h2>
-          <form class="popup__form" name="popupForm" novalidate> */}
-
-        {/* <button class="popup__save-button" type="submit">
-              Создать
-            </button>
-          </form>
-          <button
-            class="popup__cancel-button"
-            type="button"
-            aria-label="Закрыть окно"
-          ></button>
-        </div>
-      </div> */}
-
-        {/* <!-- Popup: Подтверждение удаления --> */}
-        {/* <div class="popup popup_type_confirm">
-        <div class="popup__container content__element">
-          <h2 class="popup__title">Вы уверены?</h2>
-          <button class="popup__save-button" type="button">
-            Да
-          </button>
-          <button
-            class="popup__cancel-button"
-            type="button"
-            aria-label="Закрыть окно"
-          ></button>
-        </div>
-      </div> */}
       </div>
     </CurrentUserContext.Provider>
   );
