@@ -7,7 +7,7 @@
   background-color: transparent;
   background-image: url(../../../images/Like-img.svg);
   transition: opacity 0.2s;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   justify-content: space-between;
   align-items: center;

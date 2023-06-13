@@ -22,9 +22,24 @@ function Main(props) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.toggleLike(card._id, isLiked).then((newCard) => {
-      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
-    });
+    api
+      .toggleLike(card._id, isLiked)
+      .then((newCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
+      })
+      .catch(console.error);
+  }
+
+  function handleCardDelete(card) {
+    const cardId = card._id;
+    api
+      .deleteCard(cardId)
+      .then(() => {
+        setCards((state) => state.filter((card) => card._id !== cardId));
+      })
+      .catch(console.error);
   }
 
   return (
@@ -74,6 +89,7 @@ function Main(props) {
             key={card._id}
             onCardClick={props.onCardClick}
             onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
           />
         ))}
         ;
