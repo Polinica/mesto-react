@@ -47,7 +47,7 @@ class Api {
    * - job - профессия пользователя
    * @returns {Promise} Промис с ответом сервера: обновленный объект пользователя
    */
-  setUserInfo({ name, job }) {
+  setUserInfo({ name, about }) {
     const url = `${this._baseUrl}/users/me`;
 
     return fetch(url, {
@@ -55,7 +55,7 @@ class Api {
       headers: this._headers,
       body: JSON.stringify({
         name,
-        about: job,
+        about
       }),
     }).then((res) => this._requestResult(res));
   }
