@@ -6,7 +6,7 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
-//import AddPlacePopup from "./AddPlacePopup";
+import AddPlacePopup from "./AddPlacePopup";
 
 import api from "../utils/Api";
 
@@ -105,14 +105,17 @@ function App() {
       .catch(console.error);
   }
 
-  // function handleAddPlace(newPlaceData) {
-  //   api.addNewCard(newPlaceData)
-  //     .then(newCard => {
-  //       setCards((state) => [newCard, ...state]);
-  //       closeAllPopups();
-  //     })
-  //     .catch(console.error);
-  // }
+  function handleAddPlace(newPlaceData) {
+    api
+      .addNewCard(newPlaceData)
+      .then((newCard) => {
+        //console.log(cards);
+        //console.log(state);
+        setCards((state) => [newCard, ...state]);
+        closeAllPopups();
+      })
+      .catch(console.error);
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -143,7 +146,13 @@ function App() {
           onUpdateAvatar={handleUpdateAvatar}
         />
 
-        <PopupWithForm
+        <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          onAddPlace={handleAddPlace}
+        />
+
+        {/* <PopupWithForm
           name="add-card"
           title="Новое место"
           buttonText="Создать"
@@ -179,7 +188,7 @@ function App() {
               Введите адрес сайта.
             </span>
           </label>
-        </PopupWithForm>
+        </PopupWithForm> */}
 
         <PopupWithForm
           name="confirm"
