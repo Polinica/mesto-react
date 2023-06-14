@@ -7,6 +7,7 @@ import ImagePopup from "./ImagePopup";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
+import ConfirmActionPopup from "./ConfirmActionPopup";
 
 import api from "../utils/Api";
 
@@ -18,7 +19,9 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
     React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+
   const [selectedCard, setSelectedCard] = React.useState(null);
+  const [toBeDeletedCard, setToBeDeletedCard] = React.useState(null);
   //const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
 
   const [currentUser, setCurrentUser] = React.useState({});
@@ -61,6 +64,7 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setSelectedCard(null);
     //setIsImagePopupOpen(false);
+    setToBeDeletedCard(null);
   }
 
   function handleUpdateUser(userInfo) {
@@ -95,23 +99,27 @@ function App() {
       .catch(console.error);
   }
 
-  function handleCardDelete(card) {
-    const cardId = card._id;
+  function handleAddPlace(newPlaceData) {
+    //const cardId = card._id;
     api
-      .deleteCard(cardId)
-      .then(() => {
-        setCards((state) => state.filter((card) => card._id !== cardId));
+      .addNewCard(newPlaceData)
+      .then((newCard) => {
+        setCards((state) => [newCard, ...state]);
+        closeAllPopups();
       })
       .catch(console.error);
   }
 
-  function handleAddPlace(newPlaceData) {
+  function handleCardDelete(card) {
+    setToBeDeletedCard(card);
+  }
+
+  function handleConfirmDelete() {
+    const cardId = toBeDeletedCard._id;
     api
-      .addNewCard(newPlaceData)
-      .then((newCard) => {
-        //console.log(cards);
-        //console.log(state);
-        setCards((state) => [newCard, ...state]);
+      .deleteCard(cardId)
+      .then(() => {
+        setCards((state) => state.filter((card) => card._id !== cardId));
         closeAllPopups();
       })
       .catch(console.error);
@@ -152,52 +160,12 @@ function App() {
           onAddPlace={handleAddPlace}
         />
 
-        {/* <PopupWithForm
-          name="add-card"
-          title="Новое место"
-          buttonText="Создать"
-          isOpen={isAddPlacePopupOpen}
+        <ConfirmActionPopup
+          isOpen={!!toBeDeletedCard}
           onClose={closeAllPopups}
-        >
-          <label className="popup__field">
-            <input
-              id="title-input"
-              type="text"
-              className="popup__input popup__input_type_title"
-              placeholder="Название"
-              name="name"
-              minLength="2"
-              maxLength="30"
-              required
-            />
-            <span className="popup__input-error popup__input-error_type_title title-input-error">
-              Вы пропустили это поле.
-            </span>
-          </label>
-          <label className="popup__field">
-            <input
-              id="link-input"
-              type="url"
-              className="popup__input popup__input_type_link"
-              placeholder="Ссылка на картинку"
-              name="link"
-              required
-            />
-
-            <span className="popup__input-error popup__input-error_type_link link-input-error">
-              Введите адрес сайта.
-            </span>
-          </label>
-        </PopupWithForm> */}
-
-        <PopupWithForm
-          name="confirm"
-          title="Вы уверены?"
-          buttonText="Да"
-          isOpen={false}
-          onClose={closeAllPopups}
-          //children={<></>}
+          onConfirm={handleConfirmDelete}
         />
+
         <ImagePopup
           card={selectedCard}
           onClose={closeAllPopups}
