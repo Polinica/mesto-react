@@ -6,6 +6,7 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
+//import AddPlacePopup from "./AddPlacePopup";
 
 import api from "../utils/Api";
 
@@ -22,8 +23,19 @@ function App() {
 
   const [currentUser, setCurrentUser] = React.useState({});
 
+  const [cards, setCards] = React.useState([]);
+
   React.useEffect(() => {
     api.getUserInfo().then(setCurrentUser).catch(console.error);
+  }, []);
+
+  React.useEffect(() => {
+    api
+      .getInitialCards()
+      .then((res) => {
+        setCards(res);
+      })
+      .catch(console.error);
   }, []);
 
   function handleEditAvatarClick() {
@@ -68,6 +80,40 @@ function App() {
       .catch(console.error);
   }
 
+  function handleCardLike(card) {
+    // Снова проверяем, есть ли уже лайк на этой карточке
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    api
+      .toggleLike(card._id, isLiked)
+      .then((newCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
+      })
+      .catch(console.error);
+  }
+
+  function handleCardDelete(card) {
+    const cardId = card._id;
+    api
+      .deleteCard(cardId)
+      .then(() => {
+        setCards((state) => state.filter((card) => card._id !== cardId));
+      })
+      .catch(console.error);
+  }
+
+  // function handleAddPlace(newPlaceData) {
+  //   api.addNewCard(newPlaceData)
+  //     .then(newCard => {
+  //       setCards((state) => [newCard, ...state]);
+  //       closeAllPopups();
+  //     })
+  //     .catch(console.error);
+  // }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="content">
@@ -78,6 +124,9 @@ function App() {
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
           onCardClick={handleCardClick}
+          cards={cards}
+          onCardLike={handleCardLike}
+          onCardDelete={handleCardDelete}
         />
 
         <Footer />
