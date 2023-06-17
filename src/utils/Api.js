@@ -16,6 +16,15 @@ class Api {
     // this._cardsUrl = "/cards";
   }
 
+  // _fetch(url, params) {
+  //   return fetch(this._baseUrl + url, params).then((res) => {
+  //     if (res.ok) {
+  //       return res.json();
+  //     }
+  //     return Promise.reject(`Ну вот, все пропало (Ошибка: ${res.status})`);
+  //   });
+  // }
+
   //* Проверка статуса запроса
   _requestResult(res) {
     if (res.ok) {
@@ -55,7 +64,7 @@ class Api {
       headers: this._headers,
       body: JSON.stringify({
         name,
-        about
+        about,
       }),
     }).then((res) => this._requestResult(res));
   }
@@ -124,50 +133,58 @@ class Api {
     }).then((res) => this._requestResult(res));
   }
 
+  changeLikeCardStatus(cardId, like) {
+    const url = `${this._baseUrl}/cards/${cardId}/likes`;
+    return fetch(url, {
+      method: like ? "PUT" : "DELETE",
+      headers: this._headers,
+    }).then((res) => this._requestResult(res));
+  }
+
   /**
    * Ставит лайк на карточку
    * @param {string} cardId - ID карточки
    * @returns {Promise} Промис с массивом новых лайков карточки
    */
-  _setLike(cardId) {
-    const url = `${this._baseUrl}/cards/${cardId}/likes`;
+  // _setLike(cardId) {
+  //   const url = `${this._baseUrl}/cards/${cardId}/likes`;
 
-    return fetch(url, {
-      method: "PUT",
-      headers: this._headers,
-    }).then((res) => this._requestResult(res));
-  }
-  /**
-   * Удаляет лайк с карточки
-   * @param {string} cardId - ID карточки
-   * @returns {Promise} Промис с массивом новых лайков карточки
-   */
-  _deleteLike(cardId) {
-    const url = `${this._baseUrl}/cards/${cardId}/likes`;
+  //   return fetch(url, {
+  //     method: "PUT",
+  //     headers: this._headers,
+  //   }).then((res) => this._requestResult(res));
+  // }
+  // /**
+  //  * Удаляет лайк с карточки
+  //  * @param {string} cardId - ID карточки
+  //  * @returns {Promise} Промис с массивом новых лайков карточки
+  //  */
+  // _deleteLike(cardId) {
+  //   const url = `${this._baseUrl}/cards/${cardId}/likes`;
 
-    return fetch(url, {
-      method: "DELETE",
-      headers: this._headers,
-    }).then((res) => this._requestResult(res));
-  }
+  //   return fetch(url, {
+  //     method: "DELETE",
+  //     headers: this._headers,
+  //   }).then((res) => this._requestResult(res));
+  // }
 
-  /**
-   * Переключает лайк карточки
-   * @param {string} cardId - ID карточки
-   * @param {boolean} isLiked - Текущий статус лайка
-   * @returns {Promise} Промис с массивом новых лайков карточки
-   */
-  toggleLike(cardId, isLiked) {
-    if (isLiked) {
-      return this._deleteLike(cardId).then((res) => {
-        return res.likes;
-      });
-    } else {
-      return this._setLike(cardId).then((res) => {
-        return res.likes;
-      });
-    }
-  }
+  // /**
+  //  * Переключает лайк карточки
+  //  * @param {string} cardId - ID карточки
+  //  * @param {boolean} isLiked - Текущий статус лайка
+  //  * @returns {Promise} Промис с массивом новых лайков карточки
+  //  */
+  // toggleLike(cardId, isLiked) {
+  //   if (isLiked) {
+  //     return this._deleteLike(cardId).then((res) => {
+  //       return res.likes;
+  //     });
+  //   } else {
+  //     return this._setLike(cardId).then((res) => {
+  //       return res.likes;
+  //     });
+  //   }
+  // }
 }
 
 const api = new Api(apiConfig);
