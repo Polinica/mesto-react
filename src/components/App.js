@@ -27,6 +27,8 @@ function App() {
 
   const [cards, setCards] = React.useState([]);
 
+  const [isLoading, setIsLoading] = React.useState(false);
+
   const isOpen =
     isEditAvatarPopupOpen ||
     isEditProfilePopupOpen ||
