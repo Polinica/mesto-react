@@ -27,6 +27,12 @@ function App() {
 
   const [cards, setCards] = React.useState([]);
 
+  const isOpen =
+    isEditAvatarPopupOpen ||
+    isEditProfilePopupOpen ||
+    isAddPlacePopupOpen ||
+    selectedCard;
+
   React.useEffect(() => {
     api.getUserInfo().then(setCurrentUser).catch(console.error);
   }, []);
@@ -67,10 +73,15 @@ function App() {
   }
 
   function handleUpdateUser(userInfo) {
-    api.setUserInfo(userInfo).then((newUserInfo) => {
-      setCurrentUser(newUserInfo);
-      closeAllPopups();
-    });
+    api
+      .setUserInfo(userInfo)
+      .then((newUserInfo) => {
+        setCurrentUser(newUserInfo);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleUpdateAvatar({ avatar }) {
@@ -80,7 +91,9 @@ function App() {
         setCurrentUser(newUserInfo);
         closeAllPopups();
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleCardLike(card) {
@@ -108,7 +121,9 @@ function App() {
         setCards((state) => [newCard, ...state]);
         closeAllPopups();
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleCardDelete(card) {
@@ -123,8 +138,25 @@ function App() {
         setCards((state) => state.filter((card) => card._id !== cardId));
         closeAllPopups();
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.log(err);
+      });
   }
+
+  React.useEffect(() => {
+    function closeByEscape(evt) {
+      if (evt.key === "Escape") {
+        closeAllPopups();
+      }
+    }
+    if (isOpen) {
+      // навешиваем только при открытии
+      document.addEventListener("keydown", closeByEscape);
+      return () => {
+        document.removeEventListener("keydown", closeByEscape);
+      };
+    }
+  }, [isOpen]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
